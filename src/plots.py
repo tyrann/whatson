@@ -5,7 +5,10 @@ def plot_emotions(etone):
     emotions = ("Anger", "Disgust", "Fear", "Joy", "Sadness")
     y_pos = np.arange(len(emotions))
     emotion_array = (etone.anger, etone.disgust, etone.fear, etone.joy, etone.sadness)
-
+    font = {'family' : 'normal',
+            'weight' : 'bold',
+            'size'   : 22}
+    plt.rc('font', **font)
     bars = plt.barh(y_pos, emotion_array, align='center', alpha=1)
     bars[0].set_color('#ff9b79')
     bars[1].set_color('#c8ffe7')
