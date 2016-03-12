@@ -10,15 +10,15 @@ def get_tone_for_user(username, subreddit=None, comments_limit=1):
 
     comments = [x.body for x in get_comments(username, comments_limit)]
 
-    watson_tones = []
+    comment_to_tone = []
     for comment in comments:
         json_data = query_watson(comment)
 
         tone = parse(json_data)
 
-        watson_tones.append(tone)
+        comment_to_tone.append((comment, tone))
 
-    return watson_tones
+    return comment_to_tone
 
 def get_raw_tone(string):
     json_data = query_watson(string)

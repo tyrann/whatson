@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import telegram
 import logging
+import telegram
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
 from test import get_raw_tone
@@ -12,7 +12,7 @@ from plots import plot_social
 def main():
     # Activate logging
     logging.basicConfig(level=logging.INFO,
-                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     updater = telegram.Updater(token=TELEGRAM_TOKEN)
     dispatcher = updater.dispatcher
@@ -34,13 +34,14 @@ def start(bot, update):
     Oi, I'm the What's On bot, I can help you understand emotions behind subreddit comments.\n\
     You can control me by sending these commands:\n\
     \n\
-    /ut <username> -n <count> : Evaluate the mood of the <n> last comments made by <username>\n\
-    /rs <string> : Evaluate the mood of a direct message sent to the bot\n\
+    /rs <string> : Evaluate the mood of a raw message sent to the bot\n\
+    /ut <username> : Evaluate the mood of the last comment made by <username>\n\
     "
     bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
 def unknown(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
+    bot.sendMessage(chat_id=update.message.chat_id,
+                    text="Sorry, I didn't understand that command.")
 
 def raw_text(bot, update, args):
     chat_id = update.message.chat_id
@@ -63,14 +64,18 @@ def username_tone(bot, update, args):
     if len(args) != 1:
         bot.sendMessage(
             chat_id=chat_id,
-            text='You need to provide a reddit username, like so: /username_tone <username>')
+            text='You need to provide a reddit username, like so: /ut <username>')
     else:
         # Display "typing" chat action to show that something is happening
         bot.sendChatAction(chat_id=chat_id, action=telegram.ChatAction.TYPING)
 
-        tones = get_tone_for_user(args[0])
-        #tones = FAKE_TONES
-        for tone in tones:
+        comment_to_tones = get_tone_for_user(args[0])
+
+        for comment, tone in comment_to_tones:
+            bot.sendMessage(
+                chat_id=chat_id,
+                text="Your last comment: {}".format(comment))
+
             # Plot emotions, writings and social and send it through telegram
             plot_emotions(tone.etone)
             send_figure(bot, chat_id)
