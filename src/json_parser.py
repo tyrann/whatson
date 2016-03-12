@@ -1,6 +1,3 @@
-import json
-
-
 class EmotionTone:
     def __init__(self, anger, disgust, fear, joy, sadness):
         self.anger = anger
