@@ -8,11 +8,16 @@ class EmotionTone:
         self.joy = joy
         self.sadness = sadness
 
+    def __str__(self):
+        return "Anger: {}, Disgust: {}, Fear: {}, Joy: {}, Sadness: {}".format(
+            self.anger, self.disgust, self.fear, self.joy, self.sadness)
+
 class WritingTone:
     def __init__(self, analytical, confident, tentative):
         self.analytical = analytical
         self.confident = confident
         self.tentative = tentative
+
 class SocialTone:
     def __init__(
         self,
