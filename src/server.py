@@ -4,7 +4,6 @@ import telegram
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
 from plots import plot_emotions
-from json_parser import FAKE_TONES
 
 def main():
     updater = telegram.Updater(token=TELEGRAM_TOKEN)
@@ -18,7 +17,14 @@ def main():
     updater.start_polling()
 
 def start(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text="Hey, I'm WhatSon bot! How can I help?")
+    help_message = """
+            Oi, I'm the What's On bot, I can help you understand emotions behind subreddit comments.
+        
+            You can control me by sending these commands:
+            
+            /ut <username> -n <#count> : Evaluate the mood of the <n> last comment made by <username>
+           """
+    bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
 def unknown(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
