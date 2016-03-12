@@ -6,7 +6,7 @@
 ## Commands
 
 * `/help` Send help message
-* `/rs <string>` : Evaluate the mood of a raw message sent to the bot\n\
+* `/rs <string>` : Evaluate the mood of a raw message sent to the bot
 * `/ut <username>` : Evaluate the mood of the last comment made by `<username>` on reddit
 
 
