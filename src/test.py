@@ -20,6 +20,11 @@ def get_tone_for_user(username, subreddit=None, comments_limit=1):
 
     return watson_tones
 
+def get_raw_tone(string):
+    json_data = query_watson(string)
+    tone = parse(json_data)
+    return tone
+
 def main():
     [plot_emotions(tone.etone) for tone in get_tone_for_user("timozattol")]
 if __name__ == '__main__':

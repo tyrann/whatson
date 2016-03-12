@@ -4,6 +4,7 @@ import telegram
 import logging
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
+from test import get_raw_tone
 from plots import plot_emotions
 from plots import plot_writing
 from plots import plot_social
@@ -19,6 +20,7 @@ def main():
     dispatcher.addTelegramCommandHandler('start', start)
     dispatcher.addTelegramCommandHandler('help', start)
     dispatcher.addTelegramCommandHandler('ut', username_tone)
+    dispatcher.addTelegramCommandHandler('rs', raw_text)
 
     dispatcher.addUnknownTelegramCommandHandler(unknown)
 
@@ -33,11 +35,27 @@ def start(bot, update):
     You can control me by sending these commands:\n\
     \n\
     /ut <username> -n <count> : Evaluate the mood of the <n> last comments made by <username>\n\
+    /rs <string> : Evaluate the mood of a direct message sent to the bot\n\
     "
     bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
 def unknown(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
+
+def raw_text(bot, update, args):
+    chat_id = update.message.chat_id
+    bot.sendChatAction(chat_id=chat_id, action=telegram.ChatAction.TYPING)
+    tone = get_raw_tone(" ".join(args))
+
+    plot_emotions(tone.etone)
+    send_figure(bot, chat_id)
+    plot_writing(tone.wtone)
+    send_figure(bot, chat_id)
+    plot_social(tone.stone)
+    send_figure(bot, chat_id)
+
+
+
 
 def username_tone(bot, update, args):
     chat_id = update.message.chat_id
