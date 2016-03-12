@@ -54,14 +54,12 @@ def plot_writing(wtone):
     plt.clf()
 
 def plot_social(stone):
-    params = ("Openness", "Conscientiousness", "Extraversion", "Agreeableness",
+    params = ("Open", "Conscientious", "Extrovert", "Agreeable",
         "Neuroticism")
     y_pos = np.arange(len(params))
     social_tuple = (stone.openness, stone.conscientiousness, stone.extraversion,
         stone.agreeableness, stone.neuroticism)
-    font = {'family' : 'normal',
-            'weight' : 'bold',
-            'size'   : 22}
+    font = {'size'   : 10}
     plt.rc('font', **font)
     bars = plt.barh(y_pos, social_tuple, align="center")
     bars[0].set_color(colors['dark-blue'])
