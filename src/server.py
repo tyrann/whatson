@@ -22,7 +22,7 @@ def start(bot, update):
     Oi, I'm the What's On bot, I can help you understand emotions behind subreddit comments.\n\
     You can control me by sending these commands:\n\
     \n\
-    /ut <username> -n <#count> : Evaluate the mood of the <n> last comments made by <username>\n\
+    /ut <username> -n <count> : Evaluate the mood of the <n> last comments made by <username>\n\
     "
     bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
