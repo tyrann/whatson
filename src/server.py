@@ -1,19 +1,27 @@
 #!/usr/bin/env python3
 
 import telegram
+import logging
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
-from plots import plot_emotions
+from plots import plot_writing
 from json_parser import FAKE_TONES
 
 def main():
+    # Activate logging
+    logging.basicConfig(level=logging.INFO,
+                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
     updater = telegram.Updater(token=TELEGRAM_TOKEN)
     dispatcher = updater.dispatcher
 
     dispatcher.addTelegramCommandHandler('start', start)
-    dispatcher.addTelegramCommandHandler('username_tone', username_tone)
+    dispatcher.addTelegramCommandHandler('ut', username_tone)
 
     dispatcher.addUnknownTelegramCommandHandler(unknown)
+
+    # Add error handler that prints error to stdin
+    dispatcher.addErrorHandler(lambda _, error: print(error))
 
     updater.start_polling()
 
@@ -38,7 +46,7 @@ def username_tone(bot, update, args):
         #tones = FAKE_TONES
         for tone in tones:
             # Plot emotions and save it to an image file
-            plot_emotions(tone.etone)
+            plot_writing(tone.wtone)
 
             # Send the image file
             photo = open('../out/figure.png', 'rb')
