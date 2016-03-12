@@ -1,5 +1,6 @@
 import json
 
+
 class EmotionTone:
     def __init__(self, anger, disgust, fear, joy, sadness):
         self.anger = anger
@@ -48,6 +49,10 @@ class WatsonTone:
         self.etone = etone
         self.wtone = wtone
         self.stone = stone
+
+FAKE_TONES = [
+    WatsonTone(EmotionTone(0, 0.5, 0.2, 0, 0), WritingTone(0, 0, 0), SocialTone(0, 0, 0, 0, 0))
+]
 
 
 def parse(json_data):

@@ -4,6 +4,7 @@ import telegram
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
 from plots import plot_emotions
+from json_parser import FAKE_TONES
 
 def main():
     updater = telegram.Updater(token=TELEGRAM_TOKEN)
@@ -33,7 +34,8 @@ def username_tone(bot, update, args):
         # Display "typing" chat action to show that something is happening
         bot.sendChatAction(chat_id=chat_id, action=telegram.ChatAction.TYPING)
 
-        tones = get_tone_for_user(args[0])
+        #tones = get_tone_for_user(args[0])
+        tones = FAKE_TONES
         for tone in tones:
             # Plot emotions and save it to an image file
             plot_emotions(tone.etone)
