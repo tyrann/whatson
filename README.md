@@ -18,3 +18,9 @@ You also need to install the [dependencies](requirements.txt):
 
 Your bot is ready! Launch it with `./server.py` or `python3 server.py`.
 
+## Screenshots
+
+![Raw string](http://i.imgur.com/VNCYytM.png)
+![Reddit username](http://i.imgur.com/eWBJMku.png)
+![Social characteristics](http://i.imgur.com/29fRtc8.png)
+
