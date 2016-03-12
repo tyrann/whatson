@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from watson_developer_cloud import ToneAnalyzerV3Beta
-from credential import WATSON_USERNAME, WATSON_PASSWORD
+from credentials import WATSON_USERNAME, WATSON_PASSWORD
 
 TONE_ANALYZER = ToneAnalyzerV3Beta(
     username=WATSON_USERNAME,

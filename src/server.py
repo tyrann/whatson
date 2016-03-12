@@ -2,7 +2,7 @@
 
 import logging
 import telegram
-from credential import TELEGRAM_TOKEN
+from credentials import TELEGRAM_TOKEN
 from test import get_tone_for_user
 from test import get_raw_tone
 from plots import plot_emotions
