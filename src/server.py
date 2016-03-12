@@ -4,8 +4,9 @@ import telegram
 import logging
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
+from plots import plot_emotions
+from plots import plot_writing
 from plots import plot_social
-from json_parser import FAKE_TONES
 
 def main():
     # Activate logging
@@ -16,6 +17,7 @@ def main():
     dispatcher = updater.dispatcher
 
     dispatcher.addTelegramCommandHandler('start', start)
+    dispatcher.addTelegramCommandHandler('help', start)
     dispatcher.addTelegramCommandHandler('ut', username_tone)
 
     dispatcher.addUnknownTelegramCommandHandler(unknown)
@@ -26,7 +28,13 @@ def main():
     updater.start_polling()
 
 def start(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text="Hey, I'm WhatSon bot! How can I help?")
+    help_message = "\
+    Oi, I'm the What's On bot, I can help you understand emotions behind subreddit comments.\n\
+    You can control me by sending these commands:\n\
+    \n\
+    /ut <username> -n <count> : Evaluate the mood of the <n> last comments made by <username>\n\
+    "
+    bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
 def unknown(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
@@ -45,17 +53,19 @@ def username_tone(bot, update, args):
         tones = get_tone_for_user(args[0])
         #tones = FAKE_TONES
         for tone in tones:
-            # Plot emotions and save it to an image file
+            # Plot emotions, writings and social and send it through telegram
+            plot_emotions(tone.etone)
+            send_figure(bot, chat_id)
+            plot_writing(tone.wtone)
+            send_figure(bot, chat_id)
             plot_social(tone.stone)
+            send_figure(bot, chat_id)
 
-            # Send the image file
-            photo = open('../out/figure.png', 'rb')
-            bot.sendPhoto(chat_id=chat_id, photo=photo)
-            photo.close()
-
-            bot.sendMessage(chat_id=chat_id, text=str(tone.etone))
-            bot.sendMessage(chat_id=chat_id, text=str(tone.wtone))
-            bot.sendMessage(chat_id=chat_id, text=str(tone.stone))
+def send_figure(bot, chat_id):
+    # Send the image file
+    photo = open('../out/figure.png', 'rb')
+    bot.sendPhoto(chat_id=chat_id, photo=photo)
+    photo.close()
 
 
 if __name__ == "__main__":

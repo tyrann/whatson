@@ -66,7 +66,6 @@ def plot_social(stone):
     bars[2].set_color(colors['light-blue'])
     bars[3].set_color(colors['yellow'])
     bars[4].set_color(colors['red'])
-
     plt.xlim([0, 1])
 
     plt.yticks(y_pos, params)
