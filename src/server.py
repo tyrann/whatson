@@ -32,7 +32,7 @@ def start(bot, update):
     Oi, I'm the What's On bot, I can help you understand emotions behind subreddit comments.\n\
     You can control me by sending these commands:\n\
     \n\
-    /ut <username> -n <count> : Evaluate the mood of the <n> last comments made by <username>\n\
+    /ut <username> : Evaluate the mood of the last comment made by <username>\n\
     "
     bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
@@ -45,13 +45,14 @@ def username_tone(bot, update, args):
     if len(args) != 1:
         bot.sendMessage(
             chat_id=chat_id,
-            text='You need to provide a reddit username, like so: /username_tone <username>')
+            text='You need to provide a reddit username, like so: /ut <username>')
     else:
         # Display "typing" chat action to show that something is happening
         bot.sendChatAction(chat_id=chat_id, action=telegram.ChatAction.TYPING)
 
         tones = get_tone_for_user(args[0])
-        #tones = FAKE_TONES
+
+
         for tone in tones:
             # Plot emotions, writings and social and send it through telegram
             plot_emotions(tone.etone)
