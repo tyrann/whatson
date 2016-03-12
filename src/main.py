@@ -8,7 +8,7 @@ def get_mood_for_user(username, subreddit=None, comments_limit=1):
     """ Compute watson mood of user "username" on subreddit "subreddit" by
     looking at last comments. """
 
-    comments = [str(x) for x in get_comments(username, comments_limit)]
+    comments = [x.body for x in get_comments(username, comments_limit)]
 
     watson_tones = []
     for comment in comments:
@@ -22,6 +22,5 @@ def get_mood_for_user(username, subreddit=None, comments_limit=1):
 
 def main():
     [plot(tone.etone.anger, tone.etone.disgust, tone.etone.fear, tone.etone.joy, tone.etone.sadness) for tone in get_mood_for_user("timozattol")]
-
 if __name__ == '__main__':
     main()
