@@ -3,7 +3,7 @@
 import telegram
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
-from plot import plot_emotions
+from plots import plot_emotions
 
 def main():
     updater = telegram.Updater(token=TELEGRAM_TOKEN)
