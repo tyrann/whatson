@@ -18,12 +18,10 @@ def get_mood_for_user(username, subreddit=None, comments_limit=1):
 
         watson_tones.append(tone)
 
-        plot(tone.etone.anger, tone.etone.disgust, tone.etone.fear, tone.etone.joy, tone.etone.sadness)
-
     return watson_tones
 
 def main():
-    [print(x) for x in get_mood_for_user("timozattol")]
+    [plot(tone.etone.anger, tone.etone.disgust, tone.etone.fear, tone.etone.joy, tone.etone.sadness) for tone in get_mood_for_user("timozattol")]
 
 if __name__ == '__main__':
     main()
