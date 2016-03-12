@@ -60,5 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
-credential.py
+
+# Vim stuff
 *.swp
+
+# Project specific files
+*credential.py
