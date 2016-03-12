@@ -50,9 +50,19 @@ def parse(json_data):
         emotion_tone[4]["score"]
     )
 
-    writing = None
+    writing = WritingTone(
+        writing_tone[0]["score"],
+        writing_tone[1]["score"],
+        writing_tone[2]["score"]
+    )
 
-    social = None
+    social = SocialTone(
+        social_tone[0]["score"],
+        social_tone[1]["score"],
+        social_tone[2]["score"],
+        social_tone[3]["score"],
+        social_tone[4]["score"]
+    )
 
     tone = WatsonTone(emotion, writing, social)
 
