@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import telegram
 import logging
+import telegram
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
 from plots import plot_emotions
@@ -11,7 +11,7 @@ from plots import plot_social
 def main():
     # Activate logging
     logging.basicConfig(level=logging.INFO,
-                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     updater = telegram.Updater(token=TELEGRAM_TOKEN)
     dispatcher = updater.dispatcher
@@ -37,7 +37,8 @@ def start(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
 def unknown(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
+    bot.sendMessage(chat_id=update.message.chat_id,
+                    text="Sorry, I didn't understand that command.")
 
 def username_tone(bot, update, args):
     chat_id = update.message.chat_id
@@ -50,10 +51,13 @@ def username_tone(bot, update, args):
         # Display "typing" chat action to show that something is happening
         bot.sendChatAction(chat_id=chat_id, action=telegram.ChatAction.TYPING)
 
-        tones = get_tone_for_user(args[0])
+        comment_to_tones = get_tone_for_user(args[0])
 
+        for comment, tone in comment_to_tones:
+            bot.sendMessage(
+                chat_id=chat_id,
+                text="Your last comment: {}".format(comment))
 
-        for tone in tones:
             # Plot emotions, writings and social and send it through telegram
             plot_emotions(tone.etone)
             send_figure(bot, chat_id)
