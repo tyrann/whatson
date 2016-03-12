@@ -2,7 +2,7 @@
 from reddit import get_comments
 from watson_queries import query_watson
 from json_parser import parse
-from plot import plot
+from plot import plot_emotions
 
 def get_tone_for_user(username, subreddit=None, comments_limit=1):
     """ Compute watson mood of user "username" on subreddit "subreddit" by
@@ -21,6 +21,6 @@ def get_tone_for_user(username, subreddit=None, comments_limit=1):
     return watson_tones
 
 def main():
-    [plot(tone.etone.anger, tone.etone.disgust, tone.etone.fear, tone.etone.joy, tone.etone.sadness) for tone in get_tone_for_user("timozattol")]
+    [plot_emotions(tone.etone) for tone in get_tone_for_user("timozattol")]
 if __name__ == '__main__':
     main()

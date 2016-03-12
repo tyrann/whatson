@@ -18,20 +18,30 @@ class WritingTone:
         self.confident = confident
         self.tentative = tentative
 
+    def __str__(self):
+        return "Analytical: {}, Confident: {}, Tentative: {}".format(
+            self.analytical, self.confident, self.tentative)
+
 class SocialTone:
     def __init__(
         self,
-        openness_big5,
-        conscientiousness_big5,
-        extraversion_big5,
-        agreeableness_big5,
-        neuroticism_big5):
+        openness,
+        conscientiousness,
+        extraversion,
+        agreeableness,
+        neuroticism):
 
-        self.openness_big5 = openness_big5
-        self.conscientiousness_big5 = conscientiousness_big5
-        self.extraversion_big5 = extraversion_big5
-        self.agreeableness_big5 = agreeableness_big5
-        self.neuroticism_big5 = neuroticism_big5
+        self.openness = openness
+        self.conscientiousness = conscientiousness
+        self.extraversion = extraversion
+        self.agreeableness = agreeableness
+        self.neuroticism = neuroticism
+
+    def __str__(self):
+        return ("Openness: {}, Conscientiousness: {}, Extraversion: {}, " +
+            "Agreeableness: {}, Neuroticism: {}").format(
+            self.openness, self.conscientiousness, self.extraversion,
+            self.agreeableness, self.neuroticism)
 
 class WatsonTone:
     def __init__(self, etone, wtone, stone):

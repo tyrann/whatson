@@ -1,14 +1,26 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot(anger, disgust, fear, joy, sadness):
+def plot_emotions(etone):
+    plt.figure()
+
     emotions = ("Anger", "Disgust", "Fear", "Joy", "Sadness")
     y_pos = np.arange(len(emotions))
-    performance = (anger, disgust, fear, joy, sadness)
+    emotion_array = (etone.anger, etone.disgust, etone.fear, etone.joy, etone.sadness)
 
-    plt.barh(y_pos, performance, align='center', alpha=0.4)
+    bars = plt.barh(y_pos, emotion_array, align='center', alpha=1)
+    bars[0].set_color("#ff9b79")
+    bars[1].set_color("#c8ffe7")
+    bars[2].set_color("#c6ffb4")
+    bars[3].set_color("#feffad")
+    bars[4].set_color("#8192e5")
+
+    plt.xlim([0, 1])
+
     plt.yticks(y_pos, emotions)
     plt.xlabel('Intensity')
     plt.title('Emotional intensities')
 
-    plt.show()
+    plt.savefig('../out/figure.png')
+
+    plt.close()

@@ -3,6 +3,7 @@
 import telegram
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
+from plot import plot_emotions
 
 def main():
     updater = telegram.Updater(token=TELEGRAM_TOKEN)
@@ -34,7 +35,17 @@ def username_tone(bot, update, args):
 
         tones = get_tone_for_user(args[0])
         for tone in tones:
+            # Plot emotions and save it to an image file
+            plot_emotions(tone.etone)
+
+            # Send the image file
+            photo = open('../out/figure.png', 'rb')
+            bot.sendPhoto(chat_id=chat_id, photo=photo)
+            photo.close()
+
             bot.sendMessage(chat_id=chat_id, text=str(tone.etone))
+            bot.sendMessage(chat_id=chat_id, text=str(tone.wtone))
+            bot.sendMessage(chat_id=chat_id, text=str(tone.stone))
 
 
 if __name__ == "__main__":
