@@ -3,10 +3,10 @@ import json
 
 class EmotionTone:
     def __init__(self, anger, disgust, fear, joy, sadness):
-        self.anger = anger 
-        self.disgust = disgust 
-        self.fear = fear 
-        self.joy = joy 
+        self.anger = anger
+        self.disgust = disgust
+        self.fear = fear
+        self.joy = joy
         self.sadness = sadness
 
 class WritingTone:
