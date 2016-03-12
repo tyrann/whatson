@@ -10,6 +10,7 @@ def main():
     dispatcher = updater.dispatcher
 
     dispatcher.addTelegramCommandHandler('start', start)
+    dispatcher.addTelegramCommandHandler('help', start)
     dispatcher.addTelegramCommandHandler('username_tone', username_tone)
 
     dispatcher.addUnknownTelegramCommandHandler(unknown)
@@ -17,13 +18,12 @@ def main():
     updater.start_polling()
 
 def start(bot, update):
-    help_message = """
-            Oi, I'm the What's On bot, I can help you understand emotions behind subreddit comments.
-        
-            You can control me by sending these commands:
-            
-            /ut <username> -n <#count> : Evaluate the mood of the <n> last comment made by <username>
-           """
+    help_message = "\
+    Oi, I'm the What's On bot, I can help you understand emotions behind subreddit comments.\n\
+    You can control me by sending these commands:\n\
+    \n\
+    /ut <username> -n <#count> : Evaluate the mood of the <n> last comments made by <username>\n\
+    "
     bot.sendMessage(chat_id=update.message.chat_id, text=help_message)
 
 def unknown(bot, update):
