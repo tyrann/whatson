@@ -1,12 +1,12 @@
 # What's On?
 
 ## Information
-`What's On?` is an Telegram bot that provides an interface to IBM Watson for analysing the mood of posts and comments on reddit.
+`What's On?` is a Telegram bot that provides an interface to IBM Watson for analysing the mood of posts and comments on reddit.
 
 ## Commands
 
 * `/help` Send help message
-* `/rs <string>` : Evaluate the mood of a raw message sent to the bot\n\
+* `/rs <string>` : Evaluate the mood of a raw message sent to the bot
 * `/ut <username>` : Evaluate the mood of the last comment made by `<username>` on reddit
 
 
