@@ -4,7 +4,7 @@ import telegram
 import logging
 from credential import TELEGRAM_TOKEN
 from test import get_tone_for_user
-from plots import plot_writing
+from plots import plot_social
 from json_parser import FAKE_TONES
 
 def main():
@@ -46,7 +46,7 @@ def username_tone(bot, update, args):
         #tones = FAKE_TONES
         for tone in tones:
             # Plot emotions and save it to an image file
-            plot_writing(tone.wtone)
+            plot_social(tone.stone)
 
             # Send the image file
             photo = open('../out/figure.png', 'rb')

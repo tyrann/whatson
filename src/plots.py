@@ -54,20 +54,24 @@ def plot_writing(wtone):
     plt.clf()
 
 def plot_social(stone):
-    params = ("Analytical", "Confident", "Tentative")
+    params = ("Openness", "Conscientiousness", "Extraversion", "Agreeableness",
+        "Neuroticism")
     y_pos = np.arange(len(params))
-    writing_tuple = (wtone.analytical, wtone.confident, wtone.tentative)
+    social_tuple = (stone.openness, stone.conscientiousness, stone.extraversion,
+        stone.agreeableness, stone.neuroticism)
 
-    bars = plt.barh(y_pos, writing_tuple, align="center")
-    bars[0].set_color(colors['yellow'])
+    bars = plt.barh(y_pos, social_tuple, align="center")
+    bars[0].set_color(colors['dark-blue'])
     bars[1].set_color(colors['green'])
     bars[2].set_color(colors['light-blue'])
+    bars[3].set_color(colors['yellow'])
+    bars[4].set_color(colors['red'])
 
     plt.xlim([0, 1])
 
     plt.yticks(y_pos, params)
     plt.xlabel('Intensity')
-    plt.title('Writing characteristics')
+    plt.title('Social characteristics')
 
     plt.savefig('../out/figure.png')
 
