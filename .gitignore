@@ -65,5 +65,5 @@ target/
 *.swp
 
 # Project specific files
-*credential.py
+*credentials.py
 out/*
